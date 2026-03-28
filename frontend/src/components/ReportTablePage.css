@@ -1,0 +1,624 @@
+.report-table-page {
+  padding: 40px;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  min-width: 0;
+}
+
+.report-table-header {
+  margin-bottom: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+}
+
+.report-table-header h2 {
+  font-size: 2rem;
+  color: var(--text);
+  margin: 0;
+}
+
+.report-table-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.report-table-period-toggle {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.report-table-period-btn {
+  padding: 8px 16px;
+  border: none;
+  background: var(--card);
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.report-table-period-btn:hover {
+  background: var(--bg-soft);
+  color: var(--text);
+}
+
+.report-table-period-btn.active {
+  background: var(--primary);
+  color: white;
+}
+
+.report-table-date-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.report-table-date-label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.report-table-date-input {
+  min-width: 160px;
+  flex-shrink: 0;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--text);
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.report-table-date-input:hover {
+  border-color: var(--border-soft);
+}
+
+.report-table-date-input:focus {
+  outline: none;
+  border-color: var(--accent-purple);
+  box-shadow: 0 0 0 3px var(--accent-purple-light);
+}
+
+/* Кастомный выпадающий список выбора точки */
+.report-table-point-dropdown {
+  position: relative;
+  min-width: 160px;
+}
+
+.report-table-point-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  min-width: 160px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.report-table-point-trigger .report-table-point-chevron {
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: transform 0.2s;
+}
+
+.report-table-point-dropdown:has(.report-table-point-list) .report-table-point-chevron {
+  transform: rotate(180deg);
+}
+
+.report-table-point-list {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  z-index: 50;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.report-table-point-option {
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.report-table-point-option:hover {
+  background: var(--bg-soft);
+  color: var(--text);
+}
+
+.report-table-point-option-selected,
+.report-table-point-option.report-table-point-option-selected:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.report-table-import-row {
+  position: relative;
+}
+
+.report-table-import-input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.report-table-import-btn {
+  min-height: 39px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.report-table-import-btn:hover:not(:disabled) {
+  background: var(--bg-soft);
+  border-color: var(--border-soft);
+}
+
+.report-table-import-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.report-table-import-success {
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: var(--radius);
+  color: #15803d;
+  font-size: 0.95rem;
+}
+
+.report-table-import-error.report-table-error {
+  margin-bottom: 16px;
+}
+
+.report-table-error {
+  padding: 16px;
+  background: rgba(220, 38, 38, 0.1);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  border-radius: var(--radius);
+  color: #dc2626;
+  margin-bottom: 20px;
+}
+
+.report-table-loading,
+.report-table-empty {
+  padding: 24px;
+  text-align: center;
+  color: var(--text-secondary);
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+/* Excel-вид: лист с сеткой как в бланке */
+.report-table-excel-wrap {
+  margin-top: 16px;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-md);
+  background: var(--card);
+}
+
+.report-table-excel-sheet {
+  background: var(--card);
+  border: 0;
+  min-width: 0;
+}
+
+.report-table-excel-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, var(--bg-soft) 0%, #f3f4f8 100%);
+  border-bottom: 1px solid var(--border-soft);
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.report-table-excel-title {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text);
+}
+
+.report-table-excel-meta strong {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.report-table-excel-table-wrap {
+  overflow-x: auto;
+}
+
+.report-table-excel {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 12px;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  table-layout: fixed;
+  color: var(--text);
+}
+
+.report-table-excel-full {
+  min-width: 1100px;
+}
+
+.report-table-excel th,
+.report-table-excel td {
+  border-right: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+  padding: 8px 10px;
+  vertical-align: middle;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: var(--card);
+}
+
+.report-table-excel-th-weight {
+  overflow: visible;
+}
+
+.report-table-excel thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: linear-gradient(180deg, #2b2b2b 0%, var(--primary) 100%);
+  color: #fff;
+  font-weight: 600;
+  text-align: left;
+  white-space: normal;
+  word-wrap: break-word;
+  line-height: 1.25;
+  border-right-color: rgba(255, 255, 255, 0.14);
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+.report-table-excel-th-merged {
+  text-align: center;
+}
+
+.report-table-excel .report-table-excel-num,
+.report-table-excel-th-num {
+  text-align: right;
+  min-width: 0;
+  width: 72px;
+  max-width: 90px;
+}
+
+.report-table-excel-th-weight {
+  width: 72px;
+  min-width: 72px;
+  max-width: 90px;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.report-table-excel-th-weight-label {
+  margin-right: 4px;
+}
+
+.report-table-weight-info-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.report-table-weight-info-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  font-style: italic;
+  font-family: Georgia, serif;
+  cursor: pointer;
+  line-height: 1;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.report-table-weight-info-btn:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.report-table-weight-info-tooltip {
+  min-width: 200px;
+  max-width: 280px;
+  padding: 10px 12px;
+  background: var(--card);
+  border: 1px solid var(--border-soft);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text);
+  font-weight: 400;
+  font-style: normal;
+  pointer-events: none;
+  white-space: normal;
+  text-align: left;
+}
+
+.report-table-weight-info-tooltip-portal {
+  z-index: 10000;
+}
+
+.report-table-excel-td-weight {
+  width: 72px;
+  min-width: 72px;
+  max-width: 90px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.report-table-excel-th-name,
+.report-table-excel-td-name {
+  width: 160px;
+  min-width: 120px;
+  max-width: 220px;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.report-table-excel-td-name {
+  text-align: left;
+}
+
+.report-table-excel-td-total-group {
+  background: rgba(139, 92, 246, 0.08);
+}
+
+.report-table-excel-total-row td {
+  background: linear-gradient(180deg, #f5f1ff 0%, #f0ebff 100%);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.report-table-excel-total-row .report-table-excel-td-name {
+  font-weight: 600;
+}
+
+.report-table-excel tbody tr:nth-child(even) {
+  background: #fcfcfe;
+}
+
+.report-table-excel tbody tr:hover {
+  background: #f7f4ff;
+}
+
+.report-table-excel tbody tr:nth-child(even) td {
+  background: #fcfcfe;
+}
+
+.report-table-excel tbody tr:hover td {
+  background: #f7f4ff;
+}
+
+.report-table-excel td {
+  color: var(--text);
+}
+
+.report-table-excel-td-editable {
+  min-width: 3em;
+  text-align: right;
+}
+
+.report-table-excel-td-editable:focus {
+  outline: 2px solid var(--accent-purple);
+  outline-offset: -1px;
+  background: #faf7ff;
+}
+
+.report-table-excel tbody td:empty::after {
+  content: '\00a0';
+}
+
+.report-table-empty-row {
+  text-align: center;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.report-table-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 28px;
+  padding: 16px;
+}
+
+.report-table-pagination-btn {
+  padding: 10px 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.report-table-pagination-btn:hover:not(:disabled) {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.report-table-pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.report-table-pagination-info {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+/* Отступы и фильтры — в одной лестнице с Dashboard / NewClientPage */
+@media (max-width: 1024px) {
+  .report-table-page {
+    padding: 28px 24px 40px;
+  }
+
+  .report-table-header h2 {
+    font-size: 1.65rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .report-table-page {
+    padding: 24px 20px 32px;
+  }
+
+  .report-table-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .report-table-header h2 {
+    font-size: 1.45rem;
+  }
+
+  .report-table-filters {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .report-table-date-row {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .report-table-date-input,
+  .report-table-point-dropdown {
+    min-width: 0;
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .report-table-point-trigger {
+    min-width: 0;
+  }
+
+  .report-table-excel-title-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+  }
+
+  .report-table-pagination {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .report-table-page {
+    padding: 20px 16px 28px;
+  }
+
+  .report-table-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .report-table-period-toggle {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .report-table-period-btn {
+    flex: 1;
+    padding: 10px 12px;
+    font-size: 0.88rem;
+  }
+
+  .report-table-import-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .report-table-pagination {
+    padding: 12px;
+  }
+
+  .report-table-pagination-btn {
+    padding: 10px 14px;
+    font-size: 0.88rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .report-table-page {
+    padding: 16px 12px 24px;
+  }
+
+  .report-table-header h2 {
+    font-size: 1.15rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .report-table-page {
+    padding: 14px 10px 20px;
+  }
+
+  .report-table-header h2 {
+    font-size: 1.05rem;
+  }
+}
